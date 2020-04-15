@@ -1,0 +1,21 @@
+pipleline
+  {
+  	agent any
+  	stages{
+  	  stage('Build Application'){
+  	    steps{
+  	      bat 'mvn clean install'  	 
+  	    } 
+  	  }
+  	  stage('Deploy Application to MUlesoft Cloudhub'){
+  	    steps{
+  	      bat 'mvn package deploy -DmuleDeploy'  	  
+  	    }
+  	  }
+   	  stage('Perform Regression Testing'){
+  	    steps{
+  	      bat 'newman run   C:\\Temp\\NewMan\\jenkins-cicd-demo-Timezone.postman_collection.json --disable-unicode'  	  
+  	    }
+  	  }	
+  	}
+  }
